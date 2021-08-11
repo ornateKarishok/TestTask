@@ -1,36 +1,23 @@
 package com.mycompany.testtask;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.mycompany.testtask.models.Users;
 import com.mycompany.testtask.ui.phone.DownloadImageTask;
-import com.mycompany.testtask.ui.phone.FragmentUserInfo;
 import com.mycompany.testtask.ui.tablet.UserInfo;
 
 import java.util.List;
@@ -39,14 +26,14 @@ public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.ViewHolder
     private LayoutInflater inflater = null;
     protected List<Users> users = null;
     private Context context;
-    FragmentManager manager;
+    private Activity activity;
 
 
-    public TabletAdapter(Context context, List<Users> users, FragmentManager manager) {
+    public TabletAdapter(Context context, List<Users> users, Activity activity) {
         this.users = users;
         this.context = context;
         inflater = LayoutInflater.from(context);
-        this.manager = manager;
+        this.activity = activity;
     }
 
     public TabletAdapter() {
@@ -65,7 +52,7 @@ public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.ViewHolder
     public void onBindViewHolder(TabletAdapter.ViewHolder holder, int position) {
         Users user = users.get(position);
         holder.user = user;
-        holder.manager = manager;
+        holder.activity = activity;
         new DownloadImageTask(holder.imageView).execute("https://quizee.app/storage/avatars/" + user.getId() + ".jpeg");
         holder.nameView.setText(user.getName());
         holder.descriptionView.setText(user.getEmail());
@@ -82,9 +69,9 @@ public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.ViewHolder
         final ImageView imageView;
         ConstraintLayout item;
         private final Context context;
-        FragmentManager manager;
         View view;
         Users user;
+        Activity activity;
 
         ViewHolder(View view) {
             super(view);
@@ -101,9 +88,11 @@ public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.ViewHolder
 
         @Override
         public void onClick(View v) {
-         UserInfo f = (UserInfo) manager.findFragmentByTag("unique_tag");
-               f.setNewData(user);
-
+            FragmentManager fragmentManager = ((AppCompatActivity) activity).getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            UserInfo userInfo = new UserInfo();
+            fragmentTransaction.replace(R.id.userInfo, userInfo).commit();
+            userInfo.setNewData(user);
         }
     }
 }

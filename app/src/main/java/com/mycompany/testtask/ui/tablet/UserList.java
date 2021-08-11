@@ -40,6 +40,7 @@ public class UserList extends Fragment {
     RecyclerView recyclerView;
     BufferedWriter bw;
     Context context;
+    View view;
 
     @Override
     public void onAttach(Context context) {
@@ -58,19 +59,10 @@ public class UserList extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        this.view = view;
         recyclerView = (RecyclerView) getView().findViewById(R.id.list);
-        try {
-            bw = new BufferedWriter(new OutputStreamWriter(
-                    getView().getContext().openFileOutput("FILENAME.obj", MODE_PRIVATE)));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
         context = getActivity().getApplicationContext();
     }
-
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//    }
 
     private void printUsers() {
         Call<List<Users>> listCall = new RetrofitBuilder().getApi().getUsers();
@@ -79,8 +71,7 @@ public class UserList extends Fragment {
             public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
                 if (response.isSuccessful()) {
                     writeFile(response.body());
-                    FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
-                    TabletAdapter adapter = new TabletAdapter(context, response.body(), manager);
+                    TabletAdapter adapter = new TabletAdapter(context, response.body(), getActivity());
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -89,16 +80,14 @@ public class UserList extends Fragment {
             public void onFailure(Call<List<Users>> call, Throwable t) {
                 try {
                     BufferedReader br = new BufferedReader(new InputStreamReader(
-                            getView().getContext().openFileInput("FILENAME.obj")));
-                    List<Users> usersList;
+                            view.getContext().openFileInput("FILENAME.obj")));
                     StringBuilder objectsStr = new StringBuilder();
                     String tmp;
                     Gson gson = new Gson();
                     while ((tmp = br.readLine()) != null) {
                         objectsStr.append(tmp);
                     }
-                    usersList = Arrays.asList(gson.fromJson(objectsStr.toString(), Users[].class));
-                    Adapter adapter = new Adapter(context, usersList);
+                    TabletAdapter adapter = new TabletAdapter(context, Arrays.asList(gson.fromJson(objectsStr.toString(), Users[].class)), getActivity());
                     recyclerView.setAdapter(adapter);
                 } catch (IOException e) {
                     Toast.makeText(context, "Failure " + t, Toast.LENGTH_LONG).show();
@@ -113,6 +102,8 @@ public class UserList extends Fragment {
         Gson gson = new Gson();
         String objectsStr = gson.toJson(list);
         try {
+            bw = new BufferedWriter(new OutputStreamWriter(
+                    view.getContext().openFileOutput("FILENAME.obj", MODE_PRIVATE)));
             bw.write(objectsStr);
             bw.close();
         } catch (IOException e) {
