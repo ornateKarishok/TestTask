@@ -4,6 +4,6 @@
     <string name="info">info</string>
     <string name="name">name</string>
     <string name="description">description</string>
-    <string name="Name">Name:</string>
+    <string name="name_">Name:</string>
     <string name="email">Email:</string>
 </resources>
