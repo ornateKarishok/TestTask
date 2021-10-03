@@ -2,7 +2,6 @@ package com.mycompany.testtask;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +10,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mycompany.testtask.models.Users;
+import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.phone.DownloadImageTask;
 import com.mycompany.testtask.ui.tablet.UserInfo;
 
@@ -24,12 +22,12 @@ import java.util.List;
 
 public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.ViewHolder> {
     private LayoutInflater inflater = null;
-    protected List<Users> users = null;
+    protected List<User> users = null;
     private Context context;
     private Activity activity;
 
 
-    public TabletAdapter(Context context, List<Users> users, Activity activity) {
+    public TabletAdapter(Context context, List<User> users, Activity activity) {
         this.users = users;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -50,7 +48,7 @@ public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(TabletAdapter.ViewHolder holder, int position) {
-        Users user = users.get(position);
+        User user = users.get(position);
         holder.user = user;
         holder.activity = activity;
         new DownloadImageTask(holder.imageView).execute("https://quizee.app/storage/avatars/" + user.getId() + ".jpeg");
@@ -70,7 +68,7 @@ public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.ViewHolder
         ConstraintLayout item;
         private final Context context;
         View view;
-        Users user;
+        User user;
         Activity activity;
 
         ViewHolder(View view) {

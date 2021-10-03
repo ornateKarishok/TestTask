@@ -3,13 +3,10 @@ package com.mycompany.testtask.models;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.Serializable;
-
-public class Users implements Parcelable {
+public class User implements Parcelable {
     int id;
     String name;
     String username;
@@ -19,10 +16,10 @@ public class Users implements Parcelable {
     String website;
     Company company;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(int id, String name, String username, String email, Address address, String phone, String website, Company company) {
+    public User(int id, String name, String username, String email, Address address, String phone, String website, Company company) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -98,7 +95,7 @@ public class Users implements Parcelable {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public Users(Parcel in) {
+    public User(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
         this.username = in.readString();
@@ -128,12 +125,12 @@ public class Users implements Parcelable {
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         @RequiresApi(api = Build.VERSION_CODES.M)
-        public Users createFromParcel(Parcel in) {
-            return new Users(in);
+        public User createFromParcel(Parcel in) {
+            return new User(in);
         }
 
-        public Users[] newArray(int size) {
-            return new Users[size];
+        public User[] newArray(int size) {
+            return new User[size];
         }
     };
 }

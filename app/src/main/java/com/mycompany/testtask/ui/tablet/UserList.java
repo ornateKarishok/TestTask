@@ -10,21 +10,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
-import com.mycompany.testtask.Adapter;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.TabletAdapter;
 import com.mycompany.testtask.api.RetrofitBuilder;
-import com.mycompany.testtask.models.Users;
+import com.mycompany.testtask.models.User;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -65,10 +61,10 @@ public class UserList extends Fragment {
     }
 
     private void printUsers() {
-        Call<List<Users>> listCall = new RetrofitBuilder().getApi().getUsers();
-        listCall.enqueue(new Callback<List<Users>>() {
+        Call<List<User>> listCall = new RetrofitBuilder().getApi().getUsers();
+        listCall.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
                     writeFile(response.body());
                     TabletAdapter adapter = new TabletAdapter(context, response.body(), getActivity());
@@ -77,7 +73,7 @@ public class UserList extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Users>> call, Throwable t) {
+            public void onFailure(Call<List<User>> call, Throwable t) {
                 try {
                     BufferedReader br = new BufferedReader(new InputStreamReader(
                             view.getContext().openFileInput("FILENAME.obj")));
@@ -87,7 +83,7 @@ public class UserList extends Fragment {
                     while ((tmp = br.readLine()) != null) {
                         objectsStr.append(tmp);
                     }
-                    TabletAdapter adapter = new TabletAdapter(context, Arrays.asList(gson.fromJson(objectsStr.toString(), Users[].class)), getActivity());
+                    TabletAdapter adapter = new TabletAdapter(context, Arrays.asList(gson.fromJson(objectsStr.toString(), User[].class)), getActivity());
                     recyclerView.setAdapter(adapter);
                 } catch (IOException e) {
                     Toast.makeText(context, "Failure " + t, Toast.LENGTH_LONG).show();
@@ -98,7 +94,7 @@ public class UserList extends Fragment {
 
     }
 
-    void writeFile(List<Users> list) {
+    void writeFile(List<User> list) {
         Gson gson = new Gson();
         String objectsStr = gson.toJson(list);
         try {

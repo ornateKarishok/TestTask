@@ -1,8 +1,5 @@
 package com.mycompany.testtask.ui.tablet;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,9 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,18 +24,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mycompany.testtask.R;
-import com.mycompany.testtask.models.Users;
-
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.OutputStreamWriter;
-import java.util.Calendar;
+import com.mycompany.testtask.models.User;
 
 public class UserInfo extends Fragment implements OnMapReadyCallback {
     TextView nameTextView;
     TextView emailTextView;
     TextView phoneTextView;
-    Users user;
+    User user;
     private GoogleMap mMap;
 
     @Override
@@ -101,7 +91,7 @@ public class UserInfo extends Fragment implements OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void setNewData(Users user) {
+    public void setNewData(User user) {
         this.user = user;
         Log.d("TAGGG", user.getPhone());
     }

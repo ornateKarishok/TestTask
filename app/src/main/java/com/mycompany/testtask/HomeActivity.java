@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.mycompany.testtask.api.RetrofitBuilder;
-import com.mycompany.testtask.models.Users;
+import com.mycompany.testtask.models.User;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -48,10 +48,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void printUsers() {
-        Call<List<Users>> listCall = new RetrofitBuilder().getApi().getUsers();
-        listCall.enqueue(new Callback<List<Users>>() {
+        Call<List<User>> listCall = new RetrofitBuilder().getApi().getUsers();
+        listCall.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
                     writeFile(response.body());
@@ -61,20 +61,20 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Users>> call, Throwable t) {
+            public void onFailure(Call<List<User>> call, Throwable t) {
                 try {
                     BufferedReader br = new BufferedReader(new InputStreamReader(
                             openFileInput("FILENAME.obj")));
-                    List<Users> usersList;
+                    List<User> userList;
                     StringBuilder objectsStr = new StringBuilder();
                     String tmp;
                     Gson gson = new Gson();
                     while ((tmp = br.readLine()) != null) {
                         objectsStr.append(tmp);
                     }
-                    usersList = Arrays.asList(gson.fromJson(objectsStr.toString(), Users[].class));
+                    userList = Arrays.asList(gson.fromJson(objectsStr.toString(), User[].class));
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-                    Adapter adapter = new Adapter(getApplicationContext(), usersList);
+                    Adapter adapter = new Adapter(getApplicationContext(), userList);
                     recyclerView.setAdapter(adapter);
                 } catch (IOException e) {
                     Toast.makeText(getApplicationContext(), "Failure " + t, Toast.LENGTH_LONG).show();
@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    void writeFile(List<Users> list) {
+    void writeFile(List<User> list) {
         Gson gson = new Gson();
         String objectsStr = gson.toJson(list);
         BufferedWriter bw;

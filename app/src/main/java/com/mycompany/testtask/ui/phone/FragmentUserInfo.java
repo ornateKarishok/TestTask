@@ -20,10 +20,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mycompany.testtask.R;
-import com.mycompany.testtask.models.Users;
+import com.mycompany.testtask.models.User;
 
 public class FragmentUserInfo extends AppCompatActivity implements OnMapReadyCallback {
-    private Users selectedUser;
+    private User selectedUser;
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     Marker marker;

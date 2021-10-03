@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mycompany.testtask.models.Users;
+import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.phone.DownloadImageTask;
 import com.mycompany.testtask.ui.phone.FragmentUserInfo;
 
@@ -20,11 +20,11 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private LayoutInflater inflater = null;
-    protected List<Users> users = null;
+    protected List<User> users = null;
     private Context context;
 
 
-    public Adapter(Context context, List<Users> users) {
+    public Adapter(Context context, List<User> users) {
         this.users = users;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -44,7 +44,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(Adapter.ViewHolder holder, int position) {
-        Users user = users.get(position);
+        User user = users.get(position);
         holder.user = user;
         new DownloadImageTask(holder.imageView).execute("https://quizee.app/storage/avatars/" + user.getId() + ".jpeg");
         holder.nameView.setText(user.getName());
@@ -62,7 +62,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         final ImageView imageView;
         ConstraintLayout item;
         private final Context context;
-        Users user;
+        User user;
 
         ViewHolder(View view) {
             super(view);
