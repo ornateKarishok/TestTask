@@ -1,4 +1,4 @@
-package com.mycompany.testtask;
+package com.mycompany.testtask.ui.phone;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,8 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
-import com.mycompany.testtask.ui.phone.DownloadImageTask;
-import com.mycompany.testtask.ui.phone.FragmentUserInfo;
 
 import java.util.List;
 

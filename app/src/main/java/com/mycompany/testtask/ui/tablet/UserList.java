@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.mycompany.testtask.R;
-import com.mycompany.testtask.TabletAdapter;
 import com.mycompany.testtask.api.RetrofitBuilder;
 import com.mycompany.testtask.models.User;
 

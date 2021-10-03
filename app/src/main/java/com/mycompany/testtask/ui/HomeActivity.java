@@ -1,4 +1,4 @@
-package com.mycompany.testtask;
+package com.mycompany.testtask.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.mycompany.testtask.R;
 import com.mycompany.testtask.api.RetrofitBuilder;
 import com.mycompany.testtask.models.User;
+import com.mycompany.testtask.ui.phone.Adapter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,4 +1,4 @@
-package com.mycompany.testtask;
+package com.mycompany.testtask.ui.tablet;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,9 +14,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.phone.DownloadImageTask;
-import com.mycompany.testtask.ui.tablet.UserInfo;
 
 import java.util.List;
 
