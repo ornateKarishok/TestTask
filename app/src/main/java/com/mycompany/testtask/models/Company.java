@@ -7,9 +7,9 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 public class Company implements Parcelable {
-    String name;
-    String catchPhrase;
-    String bs;
+    private String name;
+    private String catchPhrase;
+    private String bs;
 
     public Company(String name, String catchPhrase, String bs) {
         this.name = name;

@@ -24,9 +24,9 @@ import com.mycompany.testtask.models.User;
 
 public class FragmentUserInfo extends AppCompatActivity implements OnMapReadyCallback {
     private User selectedUser;
-    SupportMapFragment mapFragment;
+    private SupportMapFragment mapFragment;
     private GoogleMap mMap;
-    Marker marker;
+    private Marker marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -20,7 +20,7 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private LayoutInflater inflater = null;
-    protected List<User> users = null;
+    private List<User> users = null;
     private Context context;
 
 

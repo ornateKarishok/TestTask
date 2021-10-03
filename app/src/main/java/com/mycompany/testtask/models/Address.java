@@ -7,11 +7,11 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 public class Address implements Parcelable {
-    String street;
-    String suite;
-    String city;
-    String zipcode;
-    Geo geo;
+    private String street;
+    private String suite;
+    private String city;
+    private String zipcode;
+    private Geo geo;
 
     public Address() {
     }
@@ -70,7 +70,7 @@ public class Address implements Parcelable {
         this.street = in.readString();
         this.suite = in.readString();
         this.zipcode = in.readString();
-        this.geo =  in.readParcelable(getClass().getClassLoader());
+        this.geo = in.readParcelable(getClass().getClassLoader());
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Address implements Parcelable {
         dest.writeString(this.street);
         dest.writeString(this.suite);
         dest.writeString(this.zipcode);
-        dest.writeParcelable(this.geo,flags);
+        dest.writeParcelable(this.geo, flags);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

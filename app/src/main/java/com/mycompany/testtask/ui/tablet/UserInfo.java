@@ -27,10 +27,10 @@ import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
 
 public class UserInfo extends Fragment implements OnMapReadyCallback {
-    TextView nameTextView;
-    TextView emailTextView;
-    TextView phoneTextView;
-    User user;
+    private TextView nameTextView;
+    private TextView emailTextView;
+    private TextView phoneTextView;
+    private User user;
     private GoogleMap mMap;
 
     @Override

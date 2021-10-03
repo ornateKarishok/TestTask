@@ -7,7 +7,7 @@ public class RetrofitBuilder {
 
     private static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
     private static Retrofit retrofit;
-    static RetrofitInterface retrofitInterface;
+    private static RetrofitInterface retrofitInterface;
 
     public RetrofitBuilder() {
         retrofit = new Retrofit.Builder()

@@ -7,8 +7,8 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 public class Geo implements Parcelable {
-    String lat;
-    String lng;
+    private String lat;
+    private String lng;
 
     public Geo(String lat, String lng) {
         this.lat = lat;

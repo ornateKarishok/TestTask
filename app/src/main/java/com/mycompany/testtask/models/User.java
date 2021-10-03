@@ -7,14 +7,14 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 public class User implements Parcelable {
-    int id;
-    String name;
-    String username;
-    String email;
-    Address address;
-    String phone;
-    String website;
-    Company company;
+    private int id;
+    private String name;
+    private String username;
+    private String email;
+    private Address address;
+    private String phone;
+    private String website;
+    private Company company;
 
     public User() {
     }
@@ -103,7 +103,7 @@ public class User implements Parcelable {
         this.phone = in.readString();
         this.website = in.readString();
         this.address = in.readParcelable(getClass().getClassLoader());
-        this.company =  in.readParcelable(getClass().getClassLoader());
+        this.company = in.readParcelable(getClass().getClassLoader());
     }
 
     @Override

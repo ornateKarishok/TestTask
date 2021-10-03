@@ -22,7 +22,7 @@ import java.util.List;
 
 public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.ViewHolder> {
     private LayoutInflater inflater = null;
-    protected List<User> users = null;
+    private List<User> users = null;
     private Context context;
     private Activity activity;
 

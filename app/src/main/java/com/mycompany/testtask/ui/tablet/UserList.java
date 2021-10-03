@@ -33,10 +33,10 @@ import retrofit2.Response;
 
 public class UserList extends Fragment {
 
-    RecyclerView recyclerView;
-    BufferedWriter bw;
-    Context context;
-    View view;
+    private RecyclerView recyclerView;
+    private BufferedWriter bw;
+    private Context context;
+    private View view;
 
     @Override
     public void onAttach(Context context) {
