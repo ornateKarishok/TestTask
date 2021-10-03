@@ -7,6 +7,17 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 public class Company implements Parcelable {
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        public Company createFromParcel(Parcel in) {
+            return new Company(in);
+        }
+
+        public Company[] newArray(int size) {
+            return new Company[size];
+        }
+    };
     private String name;
     private String catchPhrase;
     private String bs;
@@ -18,6 +29,13 @@ public class Company implements Parcelable {
     }
 
     public Company() {
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public Company(Parcel in) {
+        this.name = in.readString();
+        this.catchPhrase = in.readString();
+        this.bs = in.readString();
     }
 
     public String getName() {
@@ -44,13 +62,6 @@ public class Company implements Parcelable {
         this.bs = bs;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public Company(Parcel in) {
-        this.name = in.readString();
-        this.catchPhrase = in.readString();
-        this.bs = in.readString();
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -62,15 +73,4 @@ public class Company implements Parcelable {
         dest.writeString(this.catchPhrase);
         dest.writeString(this.bs);
     }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @RequiresApi(api = Build.VERSION_CODES.M)
-        public Company createFromParcel(Parcel in) {
-            return new Company(in);
-        }
-
-        public Company[] newArray(int size) {
-            return new Company[size];
-        }
-    };
 }

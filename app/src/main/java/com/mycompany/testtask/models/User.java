@@ -7,6 +7,16 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 public class User implements Parcelable {
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
     private int id;
     private String name;
     private String username;
@@ -28,6 +38,18 @@ public class User implements Parcelable {
         this.phone = phone;
         this.website = website;
         this.company = company;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public User(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.username = in.readString();
+        this.email = in.readString();
+        this.phone = in.readString();
+        this.website = in.readString();
+        this.address = in.readParcelable(getClass().getClassLoader());
+        this.company = in.readParcelable(getClass().getClassLoader());
     }
 
     public int getId() {
@@ -94,18 +116,6 @@ public class User implements Parcelable {
         this.company = company;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public User(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.username = in.readString();
-        this.email = in.readString();
-        this.phone = in.readString();
-        this.website = in.readString();
-        this.address = in.readParcelable(getClass().getClassLoader());
-        this.company = in.readParcelable(getClass().getClassLoader());
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -122,15 +132,4 @@ public class User implements Parcelable {
         dest.writeParcelable(this.address, flags);
         dest.writeParcelable(this.company, flags);
     }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @RequiresApi(api = Build.VERSION_CODES.M)
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 }
