@@ -11,7 +11,7 @@ import com.mycompany.testtask.R;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).hide();
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent mainIntent = new Intent(MainActivity.this, HomeActivity.class);
-            MainActivity.this.startActivity(mainIntent);
-            MainActivity.this.finish();
+            Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
+            SplashActivity.this.startActivity(mainIntent);
+            SplashActivity.this.finish();
         }, 3000);
     }
 }
