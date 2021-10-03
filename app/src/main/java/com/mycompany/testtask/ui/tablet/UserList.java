@@ -66,7 +66,7 @@ public class UserList extends Fragment {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
                     writeFile(response.body());
-                    TabletAdapter adapter = new TabletAdapter(context, response.body(), getActivity());
+                    TabletUserAdapter adapter = new TabletUserAdapter(context, response.body(), getActivity());
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -82,7 +82,7 @@ public class UserList extends Fragment {
                     while ((tmp = br.readLine()) != null) {
                         objectsStr.append(tmp);
                     }
-                    TabletAdapter adapter = new TabletAdapter(context, Arrays.asList(gson.fromJson(objectsStr.toString(), User[].class)), getActivity());
+                    TabletUserAdapter adapter = new TabletUserAdapter(context, Arrays.asList(gson.fromJson(objectsStr.toString(), User[].class)), getActivity());
                     recyclerView.setAdapter(adapter);
                 } catch (IOException e) {
                     Toast.makeText(context, "Failure " + t, Toast.LENGTH_LONG).show();

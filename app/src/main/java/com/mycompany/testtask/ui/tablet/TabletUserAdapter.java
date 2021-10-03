@@ -20,34 +20,34 @@ import com.mycompany.testtask.ui.phone.DownloadImageTask;
 
 import java.util.List;
 
-public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.ViewHolder> {
+public class TabletUserAdapter extends RecyclerView.Adapter<TabletUserAdapter.ViewHolder> {
     private LayoutInflater inflater = null;
     private List<User> users = null;
     private Context context;
     private Activity activity;
 
 
-    public TabletAdapter(Context context, List<User> users, Activity activity) {
+    public TabletUserAdapter(Context context, List<User> users, Activity activity) {
         this.users = users;
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.activity = activity;
     }
 
-    public TabletAdapter() {
+    public TabletUserAdapter() {
 
     }
 
     @Override
-    public TabletAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TabletUserAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.user_item, parent, false);
-        return new TabletAdapter.ViewHolder(view);
+        return new TabletUserAdapter.ViewHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(TabletAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(TabletUserAdapter.ViewHolder holder, int position) {
         User user = users.get(position);
         holder.user = user;
         holder.activity = activity;

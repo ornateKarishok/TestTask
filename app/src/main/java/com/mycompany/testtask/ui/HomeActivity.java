@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.api.RetrofitBuilder;
 import com.mycompany.testtask.models.User;
-import com.mycompany.testtask.ui.phone.Adapter;
+import com.mycompany.testtask.ui.phone.UserAdapter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -56,8 +56,8 @@ public class HomeActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
                     writeFile(response.body());
-                    Adapter adapter = new Adapter(getApplicationContext(), response.body());
-                    recyclerView.setAdapter(adapter);
+                    UserAdapter userAdapter = new UserAdapter(getApplicationContext(), response.body());
+                    recyclerView.setAdapter(userAdapter);
                 }
             }
 
@@ -75,8 +75,8 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     userList = Arrays.asList(gson.fromJson(objectsStr.toString(), User[].class));
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-                    Adapter adapter = new Adapter(getApplicationContext(), userList);
-                    recyclerView.setAdapter(adapter);
+                    UserAdapter userAdapter = new UserAdapter(getApplicationContext(), userList);
+                    recyclerView.setAdapter(userAdapter);
                 } catch (IOException e) {
                     Toast.makeText(getApplicationContext(), "Failure " + t, Toast.LENGTH_LONG).show();
                     e.printStackTrace();

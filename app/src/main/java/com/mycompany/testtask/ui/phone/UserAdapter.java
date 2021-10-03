@@ -17,24 +17,24 @@ import com.mycompany.testtask.models.User;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private LayoutInflater inflater = null;
     private List<User> users = null;
     private Context context;
 
 
-    public Adapter(Context context, List<User> users) {
+    public UserAdapter(Context context, List<User> users) {
         this.users = users;
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
-    public Adapter() {
+    public UserAdapter() {
 
     }
 
     @Override
-    public Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public UserAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.user_item, parent, false);
         return new ViewHolder(view);
@@ -42,7 +42,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
 
     @Override
-    public void onBindViewHolder(Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(UserAdapter.ViewHolder holder, int position) {
         User user = users.get(position);
         holder.user = user;
         new DownloadImageTask(holder.imageView).execute("https://quizee.app/storage/avatars/" + user.getId() + ".jpeg");
