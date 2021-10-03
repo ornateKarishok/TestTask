@@ -1,15 +1,11 @@
 package com.mycompany.testtask.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.mycompany.testtask.R;
-
-import java.util.Objects;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -18,11 +14,24 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Objects.requireNonNull(getSupportActionBar()).hide();
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
-            SplashActivity.this.startActivity(mainIntent);
-            SplashActivity.this.finish();
-        }, 3000);
+        Thread timer = new Thread() {
+            public void run() {
+                try {
+                    sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    Intent openStartingPoint = new Intent(SplashActivity.this, HomeActivity.class);
+                    startActivity(openStartingPoint);
+                }
+            }
+        };
+        timer.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }
