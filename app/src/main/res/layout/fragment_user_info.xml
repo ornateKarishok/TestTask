@@ -8,12 +8,12 @@
         android:id="@+id/name_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/margin_15"
+        android:layout_marginTop="@dimen/margin_15"
         android:fontFamily="casual"
         android:text="@string/name_"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="@dimen/text_size_10"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="@dimen/text_size_10"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/name_title"
         app:layout_constraintTop_toTopOf="@+id/name_title" />
@@ -33,12 +33,12 @@
         android:id="@+id/email_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/margin_15"
+        android:layout_marginTop="@dimen/margin_15"
         android:fontFamily="casual"
         android:text="@string/email"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="@dimen/text_size_10"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_title" />
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="@dimen/text_size_10"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/email_title"
         app:layout_constraintTop_toTopOf="@+id/email_title" />
@@ -58,12 +58,12 @@
         android:id="@+id/phone_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/margin_15"
+        android:layout_marginTop="@dimen/margin_15"
         android:fontFamily="casual"
-        android:text="Phone"
+        android:text="@string/phone"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="@dimen/text_size_10"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_title" />
@@ -74,26 +74,26 @@
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="@dimen/text_size_10"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/phone_title"
         app:layout_constraintTop_toTopOf="@+id/phone_title" />
 
-    <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+    <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="@dimen/size_0"
+        android:layout_margin="@dimen/margin_5"
+        android:layout_marginTop="@dimen/margin_15"
         app:layout_constraintBottom_toTopOf="@+id/map"
         app:layout_constraintTop_toBottomOf="@+id/phone_title" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="@dimen/size_0"
+        android:layout_marginTop="@dimen/margin_5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/webView" />
 
