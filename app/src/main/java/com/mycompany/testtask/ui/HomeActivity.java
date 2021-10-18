@@ -37,18 +37,18 @@ public class HomeActivity extends AppCompatActivity {
             setContentView(R.layout.fragment_tablet);
         } else {
             setContentView(R.layout.fragment_users_list);
-            printUsers();
+            displayUsers();
         }
 
     }
 
     public boolean isTablet(Context context) {
-        boolean xlarge = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == 4);
-        boolean large = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE);
-        return (xlarge || large);
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-    private void printUsers() {
+    private void displayUsers() {
         Call<List<User>> listCall = new RetrofitBuilder().getApi().getUsers();
         listCall.enqueue(new Callback<List<User>>() {
             @Override
