@@ -13,6 +13,7 @@ import com.mycompany.testtask.api.RetrofitBuilder;
 import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.phone.UserAdapter;
 import com.mycompany.testtask.util.DeviceUtil;
+import com.mycompany.testtask.util.FileUtil;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -48,7 +49,11 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-                    writeFile(response.body());
+                    try {
+                        FileUtil.writeFile(response.body(), HomeActivity.this.getApplicationContext());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     UserAdapter userAdapter = new UserAdapter(getApplicationContext(), response.body());
                     recyclerView.setAdapter(userAdapter);
                 }
@@ -76,20 +81,5 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
-
-    }
-
-    void writeFile(List<User> list) {
-        Gson gson = new Gson();
-        String objectsStr = gson.toJson(list);
-        BufferedWriter bw;
-        try {
-            bw = new BufferedWriter(new OutputStreamWriter(
-                    openFileOutput("FILENAME.obj", MODE_PRIVATE)));
-            bw.write(objectsStr);
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

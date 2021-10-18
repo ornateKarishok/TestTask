@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.api.RetrofitBuilder;
 import com.mycompany.testtask.models.User;
+import com.mycompany.testtask.util.FileUtil;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,6 +26,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,7 +67,11 @@ public class UserList extends Fragment {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
-                    writeFile(response.body());
+                    try {
+                        FileUtil.writeFile(response.body(), getContext());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     TabletUserAdapter adapter = new TabletUserAdapter(context, response.body(), getActivity());
                     recyclerView.setAdapter(adapter);
                 }
@@ -91,18 +97,5 @@ public class UserList extends Fragment {
             }
         });
 
-    }
-
-    void writeFile(List<User> list) {
-        Gson gson = new Gson();
-        String objectsStr = gson.toJson(list);
-        try {
-            bw = new BufferedWriter(new OutputStreamWriter(
-                    view.getContext().openFileOutput("FILENAME.obj", MODE_PRIVATE)));
-            bw.write(objectsStr);
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
