@@ -1,19 +1,18 @@
 package com.mycompany.testtask.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.api.RetrofitBuilder;
 import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.phone.UserAdapter;
+import com.mycompany.testtask.util.DeviceUtil;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (isTablet(this.getApplicationContext())) {
+        if (DeviceUtil.isTablet(this.getApplicationContext())) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             setContentView(R.layout.fragment_tablet);
         } else {
@@ -40,12 +39,6 @@ public class HomeActivity extends AppCompatActivity {
             displayUsers();
         }
 
-    }
-
-    public boolean isTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
     private void displayUsers() {
