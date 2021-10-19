@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onFailure(Call<List<User>> call, Throwable t) {
                 try {
                     BufferedReader br = new BufferedReader(new InputStreamReader(
-                            openFileInput("FILENAME.obj")));
+                            openFileInput(FileUtil.FILE_NAME)));
                     List<User> userList;
                     StringBuilder objectsStr = new StringBuilder();
                     String tmp;

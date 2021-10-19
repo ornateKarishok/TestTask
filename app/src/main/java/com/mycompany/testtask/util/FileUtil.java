@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileUtil {
-    private static final String FILE_NAME = "FILENAME.obj";
+    public static final String FILE_NAME = "FILENAME.obj";
     public static void writeFile(List<User> list, Context context) throws IOException {
         Gson gson = new Gson();
         String objectsStr = gson.toJson(list);

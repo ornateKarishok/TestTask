@@ -60,18 +60,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         final TextView nameView, descriptionView, infoView;
         final ImageView imageView;
         ConstraintLayout item;
-        private final Context context;
+        private final View view;
         User user;
 
         ViewHolder(View view) {
             super(view);
-            context = view.getContext();
+            this.view = view;
             item = (ConstraintLayout) view.findViewById(R.id.item_parent);
             imageView = (ImageView) view.findViewById(R.id.image);
             nameView = (TextView) view.findViewById(R.id.name);
             descriptionView = (TextView) view.findViewById(R.id.description);
             infoView = (TextView) view.findViewById(R.id.info);
-            view.setClickable(true);
             view.setOnClickListener(this);
         }
 
@@ -79,9 +78,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public void onClick(View v) {
             final Intent intent;
             Log.d("Tagfail ", user.getPhone());
-            intent = new Intent(context, FragmentUserInfo.class).putExtra("User", user);
+            intent = new Intent(getContext(), FragmentUserInfo.class).putExtra("User", user);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            getContext().startActivity(intent);
+        }
+
+        public Context getContext() {
+            return view.getContext();
         }
     }
 }

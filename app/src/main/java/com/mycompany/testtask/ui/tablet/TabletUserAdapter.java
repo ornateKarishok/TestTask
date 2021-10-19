@@ -80,7 +80,6 @@ public class TabletUserAdapter extends RecyclerView.Adapter<TabletUserAdapter.Vi
             nameView = (TextView) view.findViewById(R.id.name);
             descriptionView = (TextView) view.findViewById(R.id.description);
             infoView = (TextView) view.findViewById(R.id.info);
-            view.setClickable(true);
             view.setOnClickListener(this);
         }
 

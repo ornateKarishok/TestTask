@@ -81,7 +81,7 @@ public class UserList extends Fragment {
             public void onFailure(Call<List<User>> call, Throwable t) {
                 try {
                     BufferedReader br = new BufferedReader(new InputStreamReader(
-                            view.getContext().openFileInput("FILENAME.obj")));
+                            view.getContext().openFileInput(FileUtil.FILE_NAME)));
                     StringBuilder objectsStr = new StringBuilder();
                     String tmp;
                     Gson gson = new Gson();
