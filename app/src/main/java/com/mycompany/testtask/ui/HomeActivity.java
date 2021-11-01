@@ -54,8 +54,9 @@ public class HomeActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    UserAdapter userAdapter = new UserAdapter(getApplicationContext(), response.body());
+                    UserAdapter userAdapter = new UserAdapter(response.body());
                     recyclerView.setAdapter(userAdapter);
+
                 }
             }
 
@@ -73,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     userList = Arrays.asList(gson.fromJson(objectsStr.toString(), User[].class));
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-                    UserAdapter userAdapter = new UserAdapter(getApplicationContext(), userList);
+                    UserAdapter userAdapter = new UserAdapter(userList);
                     recyclerView.setAdapter(userAdapter);
                 } catch (IOException e) {
                     Toast.makeText(getApplicationContext(), "Failure " + t, Toast.LENGTH_LONG).show();

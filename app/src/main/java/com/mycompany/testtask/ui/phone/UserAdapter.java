@@ -18,15 +18,10 @@ import com.mycompany.testtask.models.User;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-    private LayoutInflater inflater = null;
     private List<User> users = null;
-    private Context context;
 
-
-    public UserAdapter(Context context, List<User> users) {
+    public UserAdapter(List<User> users) {
         this.users = users;
-        this.context = context;
-        inflater = LayoutInflater.from(context);
     }
 
     public UserAdapter() {
@@ -35,8 +30,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public UserAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view = inflater.inflate(R.layout.user_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -57,21 +51,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        final TextView nameView, descriptionView, infoView;
-        final ImageView imageView;
-        ConstraintLayout item;
         private final View view;
-        User user;
+        private final TextView nameView, descriptionView, infoView;
+        private final ImageView imageView;
+        private User user;
 
         ViewHolder(View view) {
             super(view);
             this.view = view;
-            item = (ConstraintLayout) view.findViewById(R.id.item_parent);
+            ConstraintLayout item = (ConstraintLayout) view.findViewById(R.id.item_parent);
             imageView = (ImageView) view.findViewById(R.id.image);
             nameView = (TextView) view.findViewById(R.id.name);
             descriptionView = (TextView) view.findViewById(R.id.description);
             infoView = (TextView) view.findViewById(R.id.info);
+            view.setClickable(true);
             view.setOnClickListener(this);
+        }
+
+        public Context getContext() {
+            return view.getContext();
         }
 
         @Override
@@ -81,10 +79,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             intent = new Intent(getContext(), FragmentUserInfo.class).putExtra("User", user);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
-        }
-
-        public Context getContext() {
-            return view.getContext();
         }
     }
 }
