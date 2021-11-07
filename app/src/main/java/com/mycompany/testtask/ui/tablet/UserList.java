@@ -62,40 +62,40 @@ public class UserList extends Fragment {
     }
 
     private void printUsers() {
-        Call<List<User>> listCall = new RetrofitBuilder().getApi().getUsers();
-        listCall.enqueue(new Callback<List<User>>() {
-            @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if (response.isSuccessful()) {
-                    try {
-                        FileUtil.writeFile(response.body(), getContext());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    TabletUserAdapter adapter = new TabletUserAdapter(context, response.body(), getActivity());
-                    recyclerView.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                try {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(
-                            view.getContext().openFileInput(FileUtil.FILE_NAME)));
-                    StringBuilder objectsStr = new StringBuilder();
-                    String tmp;
-                    Gson gson = new Gson();
-                    while ((tmp = br.readLine()) != null) {
-                        objectsStr.append(tmp);
-                    }
-                    TabletUserAdapter adapter = new TabletUserAdapter(context, Arrays.asList(gson.fromJson(objectsStr.toString(), User[].class)), getActivity());
-                    recyclerView.setAdapter(adapter);
-                } catch (IOException e) {
-                    Toast.makeText(context, "Failure " + t, Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-            }
-        });
-
+//        Call<List<User>> listCall = new RetrofitBuilder().getApi().getUsers();
+//        listCall.enqueue(new Callback<List<User>>() {
+//            @Override
+//            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+//                if (response.isSuccessful()) {
+//                    try {
+//                        FileUtil.writeFile(response.body(), getContext());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    TabletUserAdapter adapter = new TabletUserAdapter(context, response.body(), getActivity());
+//                    recyclerView.setAdapter(adapter);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<User>> call, Throwable t) {
+//                try {
+//                    BufferedReader br = new BufferedReader(new InputStreamReader(
+//                            view.getContext().openFileInput(FileUtil.FILE_NAME)));
+//                    StringBuilder objectsStr = new StringBuilder();
+//                    String tmp;
+//                    Gson gson = new Gson();
+//                    while ((tmp = br.readLine()) != null) {
+//                        objectsStr.append(tmp);
+//                    }
+//                    TabletUserAdapter adapter = new TabletUserAdapter(context, Arrays.asList(gson.fromJson(objectsStr.toString(), User[].class)), getActivity());
+//                    recyclerView.setAdapter(adapter);
+//                } catch (IOException e) {
+//                    Toast.makeText(context, "Failure " + t, Toast.LENGTH_LONG).show();
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//
     }
 }
