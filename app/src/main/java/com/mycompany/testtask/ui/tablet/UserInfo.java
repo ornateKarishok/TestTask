@@ -32,6 +32,7 @@ public class UserInfo extends Fragment implements OnMapReadyCallback {
     private TextView phoneTextView;
     private User user;
     private GoogleMap mMap;
+    public static final String SCHEME = "mailto";
 
     @Override
     public void onAttach(Context context) {
@@ -39,6 +40,7 @@ public class UserInfo extends Fragment implements OnMapReadyCallback {
         super.onAttach(context);
     }
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -52,20 +54,20 @@ public class UserInfo extends Fragment implements OnMapReadyCallback {
         emailTextView = view.findViewById(R.id.email_value);
         phoneTextView = view.findViewById(R.id.phone_value);
         if (user != null) {
-            nameTextView.setText(" " + user.getName());
+            nameTextView.setText(user.getName());
 
 
-            emailTextView.setText(" " + user.getEmail());
+            emailTextView.setText(user.getEmail());
             emailTextView.setOnClickListener(v -> {
                 Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto", user.getEmail(), null));
-                startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+                        SCHEME, user.getEmail(), null));
+                startActivity(Intent.createChooser(intent, getResources().getString(R.string.choose_an_email)));
             });
 
-            phoneTextView.setText(" " + user.getPhone());
+            phoneTextView.setText(user.getPhone());
             phoneTextView.setOnClickListener(v -> {
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                callIntent.setData(Uri.parse("tel:" + user.getPhone()));
+                callIntent.setData(Uri.parse(getResources().getString(R.string.tel) + user.getPhone()));
                 startActivity(callIntent);
             });
 
@@ -93,13 +95,11 @@ public class UserInfo extends Fragment implements OnMapReadyCallback {
 
     public void setNewData(User user) {
         this.user = user;
-        Log.d("TAGGG", user.getPhone());
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        Log.d("mMap", (user.getAddress().getGeo().getLat()));
         LatLng coordinates = new LatLng(Double.parseDouble(user.getAddress().getGeo().getLat()),
                 Double.parseDouble(user.getAddress().getGeo().getLng()));
         mMap.addMarker(new MarkerOptions().position(coordinates).title(user.getAddress().getStreet()));

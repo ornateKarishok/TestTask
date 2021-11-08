@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.phone.DownloadImageTask;
+import com.mycompany.testtask.ui.phone.UserAdapter;
 
 import java.util.List;
 
@@ -25,7 +26,8 @@ public class TabletUserAdapter extends RecyclerView.Adapter<TabletUserAdapter.Vi
     private List<User> users = null;
     private Context context;
     private Activity activity;
-
+    public static final String BASE_URL_IMG = "https://quizee.app/storage/avatars/";
+    public static final String EXTENSION = ".jpeg";
 
     public TabletUserAdapter(Context context, List<User> users, Activity activity) {
         this.users = users;
@@ -51,7 +53,7 @@ public class TabletUserAdapter extends RecyclerView.Adapter<TabletUserAdapter.Vi
         User user = users.get(position);
         holder.user = user;
         holder.activity = activity;
-        new DownloadImageTask(holder.imageView).execute("https://quizee.app/storage/avatars/" + user.getId() + ".jpeg");
+        new DownloadImageTask(holder.imageView).execute(BASE_URL_IMG + user.getId() + EXTENSION);
         holder.nameView.setText(user.getName());
         holder.descriptionView.setText(user.getEmail());
         holder.infoView.setText(user.getCompany().getCatchPhrase());

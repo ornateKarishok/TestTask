@@ -18,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitBuilder {
 
     private static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
+    private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
     private static Retrofit retrofit;
     private static RetrofitInterface retrofitInterface;
 
@@ -25,7 +26,7 @@ public class RetrofitBuilder {
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setReadTimeout(60 * 1000, TimeUnit.MILLISECONDS);
         Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .setDateFormat(DATE_FORMAT)
                 .create();
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -40,21 +41,5 @@ public class RetrofitBuilder {
         }
         return retrofitInterface;
 
-    }
-    private static Interceptor provideAuthInterceptor() {
-        return chain -> {
-            Request request = chain.request();
-            Request.Builder builder = request.newBuilder();
-            Request authorizedRequest = builder.build();
-            Response response = chain.proceed(authorizedRequest);
-            String bodyString = null;
-            MediaType contentType = null;
-
-            if (response.body() != null) {
-                bodyString = response.body().string();
-                contentType = response.body().contentType();
-            }
-            return response.newBuilder().body(ResponseBody.create(contentType, bodyString)).build();
-        };
     }
 }

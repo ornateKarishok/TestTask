@@ -31,7 +31,8 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements UserAdapter.OnUserListener {
     private List<User> users = new ArrayList<>();
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    public static final String EXTRA_NAME = "User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class HomeActivity extends AppCompatActivity implements UserAdapter.OnUse
 
     @Override
     public void onUserClick(int position) {
-        Intent intent = new Intent(this, FragmentUserInfo.class).putExtra("User", users.get(position));
+        Intent intent = new Intent(this, FragmentUserInfo.class).putExtra(EXTRA_NAME, users.get(position));
         startActivity(intent);
     }
 }

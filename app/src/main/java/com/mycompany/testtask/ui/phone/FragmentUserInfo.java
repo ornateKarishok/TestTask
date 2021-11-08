@@ -21,36 +21,38 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
+import com.mycompany.testtask.ui.HomeActivity;
 
 public class FragmentUserInfo extends AppCompatActivity implements OnMapReadyCallback {
     private User selectedUser;
     private SupportMapFragment mapFragment;
     private GoogleMap mMap;
     private Marker marker;
+    public static final String SCHEME = "mailto";
+    public static final String EXTRA_NAME = "User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_user_info);
-        selectedUser = getIntent().getParcelableExtra("User");
-        Log.d("testtag", selectedUser.getName());
+        selectedUser = getIntent().getParcelableExtra(EXTRA_NAME);
 
         TextView nameTextView = findViewById(R.id.name_value);
-        nameTextView.setText(" " + selectedUser.getName());
+        nameTextView.setText(selectedUser.getName());
 
         TextView emailTextView = findViewById(R.id.email_value);
-        emailTextView.setText(" " + selectedUser.getEmail());
+        emailTextView.setText(selectedUser.getEmail());
         emailTextView.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                    "mailto", selectedUser.getEmail(), null));
-            startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+                    SCHEME, selectedUser.getEmail(), null));
+            startActivity(Intent.createChooser(intent, getResources().getString(R.string.choose_an_email)));
         });
 
         TextView phoneTextView = findViewById(R.id.phone_value);
-        phoneTextView.setText(" " + selectedUser.getPhone());
+        phoneTextView.setText(selectedUser.getPhone());
         phoneTextView.setOnClickListener(v -> {
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
-            callIntent.setData(Uri.parse("tel:" + selectedUser.getPhone()));
+            callIntent.setData(Uri.parse( getResources().getString(R.string.tel) + selectedUser.getPhone()));
             startActivity(callIntent);
         });
         WebView webView = (WebView) findViewById(R.id.webView);
@@ -73,7 +75,6 @@ public class FragmentUserInfo extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        Log.d("mMap", (selectedUser.getAddress().getGeo().getLat()));
         LatLng coordinates = new LatLng(Double.parseDouble(selectedUser.getAddress().getGeo().getLat()),
                 Double.parseDouble(selectedUser.getAddress().getGeo().getLng()));
         mMap.addMarker(new MarkerOptions().position(coordinates).title(selectedUser.getAddress().getStreet()));

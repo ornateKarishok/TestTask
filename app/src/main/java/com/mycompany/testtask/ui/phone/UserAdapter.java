@@ -19,6 +19,8 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private List <User> users = new ArrayList<>();
     private OnUserListener onUserListener;
+    public static final String BASE_URL_IMG = "https://quizee.app/storage/avatars/";
+    public static final String EXTENSION = ".jpeg";
 
     public UserAdapter(List<User> users, OnUserListener onUserListener) {
         this.users = users;
@@ -39,7 +41,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(UserAdapter.ViewHolder holder, int position) {
         User user = users.get(position);
-        new DownloadImageTask(holder.imageView).execute("https://quizee.app/storage/avatars/" + user.getId() + ".jpeg");
+        new DownloadImageTask(holder.imageView).execute(BASE_URL_IMG + user.getId() +EXTENSION );
         holder.nameView.setText(user.getName());
         holder.descriptionView.setText(user.getEmail());
         holder.infoView.setText(user.getCompany().getCatchPhrase());

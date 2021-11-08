@@ -26,6 +26,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_10"
         android:textStyle="bold"
+        android:paddingLeft="@dimen/padding_10"
         app:layout_constraintLeft_toRightOf="@+id/name_title"
         app:layout_constraintTop_toTopOf="@+id/name_title" />
 
@@ -51,6 +52,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_10"
         android:textStyle="bold"
+        android:paddingLeft="@dimen/padding_10"
         app:layout_constraintLeft_toRightOf="@+id/email_title"
         app:layout_constraintTop_toTopOf="@+id/email_title" />
 
@@ -76,6 +78,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_10"
         android:textStyle="bold"
+        android:paddingLeft="@dimen/padding_10"
         app:layout_constraintLeft_toRightOf="@+id/phone_title"
         app:layout_constraintTop_toTopOf="@+id/phone_title" />
 

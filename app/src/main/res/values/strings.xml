@@ -7,4 +7,7 @@
     <string name="name_">Name:</string>
     <string name="email">Email:</string>
     <string name="phone">Phone</string>
+    <string name="error">Error</string>
+    <string name="choose_an_email">Choose an Email client :</string>
+    <string name="tel">tel: </string>
 </resources>
