@@ -1,4 +1,4 @@
-package com.mycompany.testtask.ui.phone;
+package com.mycompany.testtask.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

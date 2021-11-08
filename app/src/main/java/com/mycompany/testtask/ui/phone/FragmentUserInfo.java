@@ -3,7 +3,6 @@ package com.mycompany.testtask.ui.phone;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -17,19 +16,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
-import com.mycompany.testtask.ui.HomeActivity;
 
 public class FragmentUserInfo extends AppCompatActivity implements OnMapReadyCallback {
-    private User selectedUser;
-    private SupportMapFragment mapFragment;
-    private GoogleMap mMap;
-    private Marker marker;
     public static final String SCHEME = "mailto";
     public static final String EXTRA_NAME = "User";
+    private User selectedUser;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +47,7 @@ public class FragmentUserInfo extends AppCompatActivity implements OnMapReadyCal
         phoneTextView.setText(selectedUser.getPhone());
         phoneTextView.setOnClickListener(v -> {
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
-            callIntent.setData(Uri.parse( getResources().getString(R.string.tel) + selectedUser.getPhone()));
+            callIntent.setData(Uri.parse(getResources().getString(R.string.tel) + selectedUser.getPhone()));
             startActivity(callIntent);
         });
         WebView webView = (WebView) findViewById(R.id.webView);
@@ -67,10 +62,7 @@ public class FragmentUserInfo extends AppCompatActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
-
-
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

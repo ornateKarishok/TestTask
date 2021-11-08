@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,16 +26,15 @@ import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
 
 public class UserInfo extends Fragment implements OnMapReadyCallback {
+    public static final String SCHEME = "mailto";
     private TextView nameTextView;
     private TextView emailTextView;
     private TextView phoneTextView;
     private User user;
     private GoogleMap mMap;
-    public static final String SCHEME = "mailto";
 
     @Override
     public void onAttach(Context context) {
-
         super.onAttach(context);
     }
 
@@ -55,8 +53,6 @@ public class UserInfo extends Fragment implements OnMapReadyCallback {
         phoneTextView = view.findViewById(R.id.phone_value);
         if (user != null) {
             nameTextView.setText(user.getName());
-
-
             emailTextView.setText(user.getEmail());
             emailTextView.setOnClickListener(v -> {
                 Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
@@ -93,10 +89,6 @@ public class UserInfo extends Fragment implements OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void setNewData(User user) {
-        this.user = user;
-    }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -106,5 +98,8 @@ public class UserInfo extends Fragment implements OnMapReadyCallback {
         CameraUpdate location = CameraUpdateFactory.newLatLngZoom(
                 coordinates, 15);
         mMap.animateCamera(location);
+    }
+    public void setNewData(User user) {
+        this.user = user;
     }
 }
