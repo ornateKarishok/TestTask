@@ -23,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
                 } finally {
                     Intent openStartingPoint = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(openStartingPoint);
+                    finish();
                 }
             }
         };
@@ -32,6 +33,5 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 }

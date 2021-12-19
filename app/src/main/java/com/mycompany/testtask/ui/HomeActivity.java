@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity implements UserAdapter.OnUse
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!DeviceUtil.isTablet(this.getApplicationContext())) {
+        if (DeviceUtil.isTablet(this.getApplicationContext())) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             setContentView(R.layout.fragment_tablet);
         } else {
