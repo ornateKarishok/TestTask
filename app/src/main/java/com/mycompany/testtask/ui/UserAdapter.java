@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,13 +30,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public UserAdapter() {
-
     }
 
     @Override
     public UserAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent, false);
-        return new ViewHolder(view, onUserListener);
+        return new ViewHolder(view);
     }
 
 
@@ -46,6 +46,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.nameView.setText(user.getName());
         holder.descriptionView.setText(user.getEmail());
         holder.infoView.setText(user.getCompany().getCatchPhrase());
+        holder.itemView.setOnClickListener(v ->
+                holder.onItemClick(holder.getAdapterPosition()));
     }
 
     @Override
@@ -53,32 +55,26 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         return users.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
         private final View view;
         private final TextView nameView, descriptionView, infoView;
         private final ImageView imageView;
-        private final OnUserListener onUserListener;
 
-        ViewHolder(View view, OnUserListener onUserListener) {
+        ViewHolder(View view) {
             super(view);
             this.view = view;
-            ConstraintLayout item = (ConstraintLayout) view.findViewById(R.id.item_parent);
             imageView = (ImageView) view.findViewById(R.id.image);
             nameView = (TextView) view.findViewById(R.id.name);
             descriptionView = (TextView) view.findViewById(R.id.description);
             infoView = (TextView) view.findViewById(R.id.info);
-            this.onUserListener = onUserListener;
-            view.setClickable(true);
-            view.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            onUserListener.onUserClick(getAdapterPosition());
         }
 
         public Context getContext() {
             return view.getContext();
+        }
+
+        private void onItemClick(int position) {
+            onUserListener.onUserClick(position);
         }
     }
 
