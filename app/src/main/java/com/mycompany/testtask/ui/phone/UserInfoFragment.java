@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
 
-public class FragmentUserInfo extends AppCompatActivity implements OnMapReadyCallback {
+public class UserInfoFragment extends AppCompatActivity implements OnMapReadyCallback {
     public static final String SCHEME = "mailto";
     public static final String EXTRA_NAME = "User";
     private User selectedUser;

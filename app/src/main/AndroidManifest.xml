@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.phone.FragmentUserInfo"
+            android:name=".ui.phone.UserInfoFragment"
             android:label="User Info">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>

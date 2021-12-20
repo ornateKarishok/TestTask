@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.api.Presenter;
 import com.mycompany.testtask.models.User;
-import com.mycompany.testtask.ui.phone.FragmentUserInfo;
+import com.mycompany.testtask.ui.phone.UserInfoFragment;
 import com.mycompany.testtask.util.DeviceUtil;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity implements UserAdapter.OnUse
 
     @Override
     public void onUserClick(int position) {
-        Intent intent = new Intent(this, FragmentUserInfo.class).putExtra(EXTRA_NAME, users.get(position));
+        Intent intent = new Intent(this, UserInfoFragment.class).putExtra(EXTRA_NAME, users.get(position));
         startActivity(intent);
     }
     public void setAdapter(List<User> userList) {
