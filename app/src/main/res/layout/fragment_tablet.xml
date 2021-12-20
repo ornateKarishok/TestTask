@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/userList"
-        android:name="com.mycompany.testtask.ui.tablet.UserList"
+        android:name="com.mycompany.testtask.ui.tablet.UserClickList"
         android:layout_width="@dimen/size_0"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"

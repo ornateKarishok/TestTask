@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.HomeActivity;
-import com.mycompany.testtask.ui.tablet.UserList;
+import com.mycompany.testtask.ui.tablet.UserClickList;
 import com.mycompany.testtask.util.FileUtil;
 
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class Presenter {
         });
     }
 
-    public static void getUsersList(UserList fragment) {
+    public static void getUsersList(UserClickList fragment) {
         Call<List<User>> listCall = new RetrofitBuilder().getApi().getUsers();
         listCall.enqueue(new Callback<List<User>>() {
             @Override

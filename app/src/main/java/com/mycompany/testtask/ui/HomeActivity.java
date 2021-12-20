@@ -16,7 +16,7 @@ import com.mycompany.testtask.util.DeviceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements UserAdapter.OnUserListener {
+public class HomeActivity extends AppCompatActivity implements UserAdapter.OnUserClickListener {
     public static final String EXTRA_NAME = "User";
     private List<User> users = new ArrayList<>();
     private RecyclerView recyclerView;

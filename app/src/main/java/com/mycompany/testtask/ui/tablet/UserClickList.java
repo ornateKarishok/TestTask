@@ -21,7 +21,7 @@ import com.mycompany.testtask.ui.UserAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserList extends Fragment implements UserAdapter.OnUserListener{
+public class UserClickList extends Fragment implements UserAdapter.OnUserClickListener {
     private RecyclerView recyclerView;
     private Context context;
     private List<User> users = new ArrayList<>();

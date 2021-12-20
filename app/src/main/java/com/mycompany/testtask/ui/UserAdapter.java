@@ -6,9 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mycompany.testtask.R;
@@ -22,11 +20,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public static final String BASE_URL_IMG = "https://quizee.app/storage/avatars/";
     public static final String EXTENSION = ".jpeg";
     private List<User> users = new ArrayList<>();
-    private OnUserListener onUserListener;
+    private OnUserClickListener onUserClickListener;
 
-    public UserAdapter(List<User> users, OnUserListener onUserListener) {
+    public UserAdapter(List<User> users, OnUserClickListener onUserClickListener) {
         this.users = users;
-        this.onUserListener = onUserListener;
+        this.onUserClickListener = onUserClickListener;
     }
 
     public UserAdapter() {
@@ -74,11 +72,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
 
         private void onItemClick(int position) {
-            onUserListener.onUserClick(position);
+            onUserClickListener.onUserClick(position);
         }
     }
 
-    public interface OnUserListener {
+    public interface OnUserClickListener {
         void onUserClick(int position);
     }
 }
