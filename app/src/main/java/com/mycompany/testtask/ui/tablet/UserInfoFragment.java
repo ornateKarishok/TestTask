@@ -25,7 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
 
-public class UserInfo extends Fragment implements OnMapReadyCallback {
+public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
     public static final String SCHEME = "mailto";
     private TextView nameTextView;
     private TextView emailTextView;

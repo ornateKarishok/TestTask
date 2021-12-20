@@ -5,7 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.HomeActivity;
-import com.mycompany.testtask.ui.tablet.UserClickList;
+import com.mycompany.testtask.ui.tablet.UserListFragment;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -57,7 +57,7 @@ public class FileUtil {
         return userList;
     }
 
-    public static List<User> readFile(UserClickList fragment) {
+    public static List<User> readFile(UserListFragment fragment) {
         BufferedReader br = null;
         List<User> userList = new ArrayList<>();
         try {

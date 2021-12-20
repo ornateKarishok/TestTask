@@ -21,21 +21,11 @@ import com.mycompany.testtask.ui.UserAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserClickList extends Fragment implements UserAdapter.OnUserClickListener {
+public class UserListFragment extends Fragment implements UserAdapter.OnUserClickListener {
     private RecyclerView recyclerView;
-    private Context context;
     private List<User> users = new ArrayList<>();
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -46,7 +36,6 @@ public class UserClickList extends Fragment implements UserAdapter.OnUserClickLi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         recyclerView = (RecyclerView) getView().findViewById(R.id.list);
-        context = getActivity().getApplicationContext();
         Presenter.getUsersList(this);
     }
 
@@ -55,16 +44,13 @@ public class UserClickList extends Fragment implements UserAdapter.OnUserClickLi
         UserAdapter userAdapter = new UserAdapter(userList, this);
         recyclerView.setAdapter(userAdapter);
     }
-    public Context getContext(){
-        return this.context;
-    }
 
     @Override
     public void onUserClick(int position) {
         FragmentManager fragmentManager = ((AppCompatActivity) getActivity()).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        UserInfo userInfo = new UserInfo();
-        fragmentTransaction.replace(R.id.userInfo, userInfo).commit();
-        userInfo.setNewData(this.users.get(position));
+        UserInfoFragment userInfoFragment = new UserInfoFragment();
+        fragmentTransaction.replace(R.id.userInfoFragment, userInfoFragment).commit();
+        userInfoFragment.setNewData(this.users.get(position));
     }
 }
