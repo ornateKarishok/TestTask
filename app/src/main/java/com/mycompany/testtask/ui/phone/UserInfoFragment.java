@@ -40,14 +40,14 @@ public class UserInfoFragment extends AppCompatActivity implements OnMapReadyCal
         emailTextView.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                     SCHEME, selectedUser.getEmail(), null));
-            startActivity(Intent.createChooser(intent, getResources().getString(R.string.choose_an_email)));
+            startActivity(Intent.createChooser(intent, getString(R.string.choose_an_email)));
         });
 
         TextView phoneTextView = findViewById(R.id.phone_value);
         phoneTextView.setText(selectedUser.getPhone());
         phoneTextView.setOnClickListener(v -> {
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
-            callIntent.setData(Uri.parse(getResources().getString(R.string.tel) + selectedUser.getPhone()));
+            callIntent.setData(Uri.parse(selectedUser.getPhone()));
             startActivity(callIntent);
         });
         WebView webView = (WebView) findViewById(R.id.webView);
