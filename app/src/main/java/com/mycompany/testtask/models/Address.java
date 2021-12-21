@@ -1,22 +1,21 @@
 package com.mycompany.testtask.models;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.RequiresApi;
-
 public class Address implements Parcelable {
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @RequiresApi(api = Build.VERSION_CODES.M)
+    public static final Creator<Address> CREATOR = new Creator<Address>() {
+        @Override
         public Address createFromParcel(Parcel in) {
             return new Address(in);
         }
 
+        @Override
         public Address[] newArray(int size) {
             return new Address[size];
         }
     };
+
     private String street;
     private String suite;
     private String city;
@@ -34,13 +33,13 @@ public class Address implements Parcelable {
         this.geo = geo;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public Address(Parcel in) {
-        this.city = in.readString();
-        this.street = in.readString();
-        this.suite = in.readString();
-        this.zipcode = in.readString();
-        this.geo = in.readParcelable(getClass().getClassLoader());
+
+    protected Address(Parcel in) {
+        street = in.readString();
+        suite = in.readString();
+        city = in.readString();
+        zipcode = in.readString();
+        geo = in.readParcelable(Geo.class.getClassLoader());
     }
 
     public String getStreet() {
@@ -90,10 +89,12 @@ public class Address implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.city);
-        dest.writeString(this.street);
-        dest.writeString(this.suite);
-        dest.writeString(this.zipcode);
-        dest.writeParcelable(this.geo, flags);
+        dest.writeString(street);
+        dest.writeString(suite);
+        dest.writeString(city);
+        dest.writeString(zipcode);
+        dest.writeParcelable(geo, flags);
     }
 }
+
+

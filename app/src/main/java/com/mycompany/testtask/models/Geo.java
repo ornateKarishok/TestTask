@@ -7,16 +7,18 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 public class Geo implements Parcelable {
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @RequiresApi(api = Build.VERSION_CODES.M)
+    public static final Creator<Geo> CREATOR = new Creator<Geo>() {
+        @Override
         public Geo createFromParcel(Parcel in) {
             return new Geo(in);
         }
 
+        @Override
         public Geo[] newArray(int size) {
             return new Geo[size];
         }
     };
+
     private String lat;
     private String lng;
 
@@ -28,9 +30,9 @@ public class Geo implements Parcelable {
     public Geo() {
     }
 
-    public Geo(Parcel in) {
-        this.lng = in.readString();
-        this.lat = in.readString();
+    protected Geo(Parcel in) {
+        lat = in.readString();
+        lng = in.readString();
     }
 
     public String getLat() {
@@ -56,7 +58,7 @@ public class Geo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.lat);
-        dest.writeString(this.lng);
+        dest.writeString(lat);
+        dest.writeString(lng);
     }
 }

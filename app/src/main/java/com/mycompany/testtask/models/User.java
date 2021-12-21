@@ -7,12 +7,13 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 public class User implements Parcelable {
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @RequiresApi(api = Build.VERSION_CODES.M)
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
         public User createFromParcel(Parcel in) {
             return new User(in);
         }
 
+        @Override
         public User[] newArray(int size) {
             return new User[size];
         }
@@ -40,16 +41,15 @@ public class User implements Parcelable {
         this.company = company;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public User(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.username = in.readString();
-        this.email = in.readString();
-        this.phone = in.readString();
-        this.website = in.readString();
-        this.address = in.readParcelable(getClass().getClassLoader());
-        this.company = in.readParcelable(getClass().getClassLoader());
+    protected User(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        username = in.readString();
+        email = in.readString();
+        address = in.readParcelable(Address.class.getClassLoader());
+        phone = in.readString();
+        website = in.readString();
+        company = in.readParcelable(Company.class.getClassLoader());
     }
 
     public int getId() {
@@ -123,13 +123,13 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeString(this.name);
-        dest.writeString(this.username);
-        dest.writeString(this.email);
-        dest.writeString(this.phone);
-        dest.writeString(this.website);
-        dest.writeParcelable(this.address, flags);
-        dest.writeParcelable(this.company, flags);
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(username);
+        dest.writeString(email);
+        dest.writeParcelable(address, flags);
+        dest.writeString(phone);
+        dest.writeString(website);
+        dest.writeParcelable(company, flags);
     }
 }

@@ -8,16 +8,6 @@ import androidx.annotation.RequiresApi;
 
 public class Company implements Parcelable {
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @RequiresApi(api = Build.VERSION_CODES.M)
-        public Company createFromParcel(Parcel in) {
-            return new Company(in);
-        }
-
-        public Company[] newArray(int size) {
-            return new Company[size];
-        }
-    };
     private String name;
     private String catchPhrase;
     private String bs;
@@ -31,12 +21,23 @@ public class Company implements Parcelable {
     public Company() {
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public Company(Parcel in) {
-        this.name = in.readString();
-        this.catchPhrase = in.readString();
-        this.bs = in.readString();
+    protected Company(Parcel in) {
+        name = in.readString();
+        catchPhrase = in.readString();
+        bs = in.readString();
     }
+
+    public static final Creator<Company> CREATOR = new Creator<Company>() {
+        @Override
+        public Company createFromParcel(Parcel in) {
+            return new Company(in);
+        }
+
+        @Override
+        public Company[] newArray(int size) {
+            return new Company[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -69,8 +70,8 @@ public class Company implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.catchPhrase);
-        dest.writeString(this.bs);
+        dest.writeString(name);
+        dest.writeString(catchPhrase);
+        dest.writeString(bs);
     }
 }
