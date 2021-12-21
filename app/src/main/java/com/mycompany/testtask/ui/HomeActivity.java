@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mycompany.testtask.R;
-import com.mycompany.testtask.api.Presenter;
+import com.mycompany.testtask.api.ApiExecutor;
 import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.phone.UserInfoFragment;
 import com.mycompany.testtask.util.DeviceUtil;
@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity implements UserAdapter.OnUse
         } else {
             setContentView(R.layout.fragment_users_list);
             recyclerView = findViewById(R.id.list);
-            Presenter.getUsersList(this);
+            ApiExecutor.getUsersList(this);
         }
     }
 

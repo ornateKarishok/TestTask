@@ -1,6 +1,5 @@
 package com.mycompany.testtask.ui.tablet;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mycompany.testtask.R;
-import com.mycompany.testtask.api.Presenter;
+import com.mycompany.testtask.api.ApiExecutor;
 import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.ui.UserAdapter;
 
@@ -36,7 +35,7 @@ public class UserListFragment extends Fragment implements UserAdapter.OnUserClic
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         recyclerView = (RecyclerView) getView().findViewById(R.id.list);
-        Presenter.getUsersList(this);
+        ApiExecutor.getUsersList(this);
     }
 
     public void setAdapter(List<User> userList) {

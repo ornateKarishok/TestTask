@@ -16,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Presenter {
+public class ApiExecutor {
 
     public static void getUsersList(HomeActivity activity) {
         Call<List<User>> listCall = new RetrofitBuilder().getApi().getUsers();
