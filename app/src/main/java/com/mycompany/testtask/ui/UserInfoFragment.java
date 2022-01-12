@@ -1,5 +1,6 @@
 package com.mycompany.testtask.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -27,11 +29,7 @@ import com.mycompany.testtask.util.DeviceUtil;
 public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
     public static final String SCHEME = "mailto";
     public static final String ARG_KEY = "user";
-    private TextView nameTextView;
-    private TextView emailTextView;
-    private TextView phoneTextView;
     private User user;
-    private GoogleMap mMap;
 
     public static UserInfoFragment newInstance(User user) {
         UserInfoFragment userInfoFragment = new UserInfoFragment();
@@ -41,22 +39,22 @@ public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
         return userInfoFragment;
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         if (getArguments() != null) {
             this.user = getArguments().getParcelable(ARG_KEY);
         }
         View view;
         if (DeviceUtil.isTablet(requireContext())) {
-
             view = inflater.inflate(R.layout.fragment_tablet, container, false);
         } else {
             view = inflater.inflate(R.layout.fragment_user_info, container, false);
         }
-        nameTextView = view.findViewById(R.id.name_value);
-        emailTextView = view.findViewById(R.id.email_value);
-        phoneTextView = view.findViewById(R.id.phone_value);
+        TextView nameTextView = view.findViewById(R.id.name_value);
+        TextView emailTextView = view.findViewById(R.id.email_value);
+        TextView phoneTextView = view.findViewById(R.id.phone_value);
         if (user != null) {
             nameTextView.setText(user.getName());
             emailTextView.setText(user.getEmail());
@@ -91,12 +89,11 @@ public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
         LatLng coordinates = new LatLng(Double.parseDouble(user.getAddress().getGeo().getLat()),
                 Double.parseDouble(user.getAddress().getGeo().getLng()));
-        mMap.addMarker(new MarkerOptions().position(coordinates).title(user.getAddress().getStreet()));
+        googleMap.addMarker(new MarkerOptions().position(coordinates).title(user.getAddress().getStreet()));
         CameraUpdate location = CameraUpdateFactory.newLatLngZoom(
                 coordinates, 15);
-        mMap.animateCamera(location);
+        googleMap.animateCamera(location);
     }
 }

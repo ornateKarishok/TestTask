@@ -16,16 +16,8 @@ public class Geo implements Parcelable {
         }
     };
 
-    private String lat;
-    private String lng;
-
-    public Geo(String lat, String lng) {
-        this.lat = lat;
-        this.lng = lng;
-    }
-
-    public Geo() {
-    }
+    private final String lat;
+    private final String lng;
 
     protected Geo(Parcel in) {
         lat = in.readString();
@@ -36,16 +28,8 @@ public class Geo implements Parcelable {
         return lat;
     }
 
-    public void setLat(String lat) {
-        this.lat = lat;
-    }
-
     public String getLng() {
         return lng;
-    }
-
-    public void setLng(String lng) {
-        this.lng = lng;
     }
 
     @Override

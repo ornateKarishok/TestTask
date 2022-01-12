@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mycompany.testtask.R;
@@ -19,17 +20,15 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public static final String BASE_URL_IMG = "https://quizee.app/storage/avatars/";
     public static final String EXTENSION = ".jpeg";
-    private List<User> users = new ArrayList<>();
-    private OnUserClickListener onUserClickListener;
+    private List<User> users;
+    private final OnUserClickListener onUserClickListener;
 
     public UserAdapter(List<User> users, OnUserClickListener onUserClickListener) {
         this.users = users;
         this.onUserClickListener = onUserClickListener;
     }
 
-    public UserAdapter() {
-    }
-
+    @NonNull
     @Override
     public UserAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent, false);
@@ -61,10 +60,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         ViewHolder(View view) {
             super(view);
             this.view = view;
-            imageView = (ImageView) view.findViewById(R.id.image);
-            nameView = (TextView) view.findViewById(R.id.name);
-            descriptionView = (TextView) view.findViewById(R.id.description);
-            infoView = (TextView) view.findViewById(R.id.info);
+            imageView = view.findViewById(R.id.image);
+            nameView = view.findViewById(R.id.name);
+            descriptionView = view.findViewById(R.id.description);
+            infoView = view.findViewById(R.id.info);
         }
 
         public Context getContext() {

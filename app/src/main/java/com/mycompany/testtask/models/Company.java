@@ -6,17 +6,8 @@ import android.os.Parcelable;
 public class Company implements Parcelable {
 
     private String name;
-    private String catchPhrase;
-    private String bs;
-
-    public Company(String name, String catchPhrase, String bs) {
-        this.name = name;
-        this.catchPhrase = catchPhrase;
-        this.bs = bs;
-    }
-
-    public Company() {
-    }
+    private final String catchPhrase;
+    private final String bs;
 
     protected Company(Parcel in) {
         name = in.readString();
@@ -46,18 +37,6 @@ public class Company implements Parcelable {
 
     public String getCatchPhrase() {
         return catchPhrase;
-    }
-
-    public void setCatchPhrase(String catchPhrase) {
-        this.catchPhrase = catchPhrase;
-    }
-
-    public String getBs() {
-        return bs;
-    }
-
-    public void setBs(String bs) {
-        this.bs = bs;
     }
 
     @Override

@@ -30,7 +30,7 @@ public class FileUtil {
     }
 
     public static List<User> readFile(Context context) {
-        BufferedReader br = null;
+        BufferedReader br;
         List<User> userList = new ArrayList<>();
         try {
             br = new BufferedReader(new InputStreamReader(
@@ -45,7 +45,7 @@ public class FileUtil {
         Gson gson = new Gson();
         while (true) {
             try {
-                if (!((tmp = br.readLine()) != null)) break;
+                if ((tmp = br.readLine()) == null) break;
             } catch (IOException e) {
                 e.printStackTrace();
             }

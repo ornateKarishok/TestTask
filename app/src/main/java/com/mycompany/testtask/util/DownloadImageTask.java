@@ -1,5 +1,6 @@
 package com.mycompany.testtask.util;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import java.io.InputStream;
 
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+    @SuppressLint("StaticFieldLeak")
     private final ImageView bmImage;
 
     public DownloadImageTask(ImageView bmImage) {

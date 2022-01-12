@@ -1,5 +1,6 @@
 package com.mycompany.testtask.ui;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,11 +26,13 @@ import com.mycompany.testtask.util.FragmentUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserListFragment extends Fragment implements UserAdapter.OnUserClickListener, OnUsersLoadListener {
     private RecyclerView recyclerView;
     private List<User> users = new ArrayList<>();
 
+    @SuppressLint("InflateParams")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,8 +46,8 @@ public class UserListFragment extends Fragment implements UserAdapter.OnUserClic
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        recyclerView = getView().findViewById(R.id.list);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        recyclerView = requireView().findViewById(R.id.list);
         new ApiExecutor().getUsersList(this);
     }
 
@@ -55,7 +59,7 @@ public class UserListFragment extends Fragment implements UserAdapter.OnUserClic
             fragmentTransaction.replace(R.id.userInfoFragment, UserInfoFragment.newInstance(this.users.get(position))).commit();
         } else {
             FragmentUtil.replaceFragment(getParentFragmentManager(),
-                    UserInfoFragment.newInstance(this.users.get(position)));
+                    UserInfoFragment.newInstance(this.users.get(position)), R.id.container);
         }
     }
 

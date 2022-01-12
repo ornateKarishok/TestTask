@@ -1,5 +1,7 @@
 package com.mycompany.testtask.api;
 
+import androidx.annotation.NonNull;
+
 import com.mycompany.testtask.models.User;
 
 import java.util.List;
@@ -11,17 +13,18 @@ import retrofit2.Response;
 public class ApiExecutor {
 
     public void getUsersList(OnUsersLoadListener listener) {
-        Call<List<User>> listCall = new RetrofitBuilder().getApi().getUsers();
+        new RetrofitBuilder();
+        Call<List<User>> listCall = RetrofitBuilder.getApi().getUsers();
         listCall.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
                 if (response.isSuccessful()) {
                     listener.onDataLoad(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
                 listener.onError(t);
             }
         });
