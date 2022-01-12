@@ -1,6 +1,5 @@
-package com.mycompany.testtask.ui.tablet;
+package com.mycompany.testtask.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -24,30 +22,38 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
+import com.mycompany.testtask.util.DeviceUtil;
 
 public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
     public static final String SCHEME = "mailto";
+    public static final String ARG_KEY = "user";
     private TextView nameTextView;
     private TextView emailTextView;
     private TextView phoneTextView;
     private User user;
     private GoogleMap mMap;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public static UserInfoFragment newInstance(User user) {
+        UserInfoFragment userInfoFragment = new UserInfoFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(ARG_KEY, user);
+        userInfoFragment.setArguments(args);
+        return userInfoFragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        if (getArguments() != null) {
+            this.user = getArguments().getParcelable(ARG_KEY);
+        }
+        View view;
+        if (DeviceUtil.isTablet(requireContext())) {
 
-        View view = inflater.inflate(R.layout.user_info_tablet, container, false);
+            view = inflater.inflate(R.layout.fragment_tablet, container, false);
+        } else {
+            view = inflater.inflate(R.layout.fragment_user_info, container, false);
+        }
         nameTextView = view.findViewById(R.id.name_value);
         emailTextView = view.findViewById(R.id.email_value);
         phoneTextView = view.findViewById(R.id.phone_value);
@@ -67,7 +73,7 @@ public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
                 startActivity(callIntent);
             });
 
-            WebView webView = (WebView) view.findViewById(R.id.webView);
+            WebView webView = view.findViewById(R.id.webView);
             WebSettings webSettings = webView.getSettings();
             webSettings.setJavaScriptEnabled(true);
             webView.setWebViewClient(new WebViewClient() {
@@ -83,12 +89,6 @@ public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -98,8 +98,5 @@ public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
         CameraUpdate location = CameraUpdateFactory.newLatLngZoom(
                 coordinates, 15);
         mMap.animateCamera(location);
-    }
-    public void setNewData(User user) {
-        this.user = user;
     }
 }

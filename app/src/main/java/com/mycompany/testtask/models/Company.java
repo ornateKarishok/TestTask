@@ -1,10 +1,7 @@
 package com.mycompany.testtask.models;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.RequiresApi;
 
 public class Company implements Parcelable {
 

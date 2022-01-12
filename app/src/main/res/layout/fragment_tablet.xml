@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/userList"
-        android:name="com.mycompany.testtask.ui.tablet.UserListFragment"
+        android:name="com.mycompany.testtask.ui.UserListFragment"
         android:layout_width="@dimen/size_0"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/userInfoFragment"
-        android:name="com.mycompany.testtask.ui.tablet.UserInfoFragment"
+        android:name="com.mycompany.testtask.ui.UserInfoFragment"
         android:layout_width="@dimen/size_0"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toRightOf="@+id/userList"
