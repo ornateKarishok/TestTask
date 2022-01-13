@@ -20,6 +20,7 @@ public class FileUtil {
     public static final String FILE_NAME = "FILENAME.obj";
 
     public static void writeFile(List<User> list, Context context) throws IOException {
+
         Gson gson = new Gson();
         String objectsStr = gson.toJson(list);
         File file = new File(context.getFilesDir(), FILE_NAME);

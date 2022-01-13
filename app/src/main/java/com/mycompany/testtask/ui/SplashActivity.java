@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mycompany.testtask.R;
+import com.mycompany.testtask.util.DeviceUtil;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -21,7 +22,12 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    Intent openStartingPoint = new Intent(SplashActivity.this, HomeActivity.class);
+                    Intent openStartingPoint;
+                    if (DeviceUtil.isTablet(getApplicationContext())) {
+                        openStartingPoint = new Intent(SplashActivity.this, TabletActivity.class);
+                    } else {
+                        openStartingPoint = new Intent(SplashActivity.this, HomeActivity.class);
+                    }
                     startActivity(openStartingPoint);
                     finish();
                 }

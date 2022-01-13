@@ -46,12 +46,7 @@ public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
         if (getArguments() != null) {
             this.user = getArguments().getParcelable(ARG_KEY);
         }
-        View view;
-        if (DeviceUtil.isTablet(requireContext())) {
-            view = inflater.inflate(R.layout.fragment_tablet, container, false);
-        } else {
-            view = inflater.inflate(R.layout.fragment_user_info, container, false);
-        }
+        View view= inflater.inflate(R.layout.fragment_user_info, container, false);
         TextView nameTextView = view.findViewById(R.id.name_value);
         TextView emailTextView = view.findViewById(R.id.email_value);
         TextView phoneTextView = view.findViewById(R.id.phone_value);
@@ -89,11 +84,13 @@ public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng coordinates = new LatLng(Double.parseDouble(user.getAddress().getGeo().getLat()),
-                Double.parseDouble(user.getAddress().getGeo().getLng()));
-        googleMap.addMarker(new MarkerOptions().position(coordinates).title(user.getAddress().getStreet()));
-        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(
-                coordinates, 15);
-        googleMap.animateCamera(location);
+        if(user.getAddress() != null) {
+            LatLng coordinates = new LatLng(Double.parseDouble(user.getAddress().getGeo().getLat()),
+                    Double.parseDouble(user.getAddress().getGeo().getLng()));
+            googleMap.addMarker(new MarkerOptions().position(coordinates).title(user.getAddress().getStreet()));
+            CameraUpdate location = CameraUpdateFactory.newLatLngZoom(
+                    coordinates, 15);
+            googleMap.animateCamera(location);
+        }
     }
 }

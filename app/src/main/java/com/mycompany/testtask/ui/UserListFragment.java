@@ -3,6 +3,7 @@ package com.mycompany.testtask.ui;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,6 @@ public class UserListFragment extends Fragment implements UserAdapter.OnUserClic
     }
 
     public static UserListFragment newInstance() {
-
         return new UserListFragment();
     }
 
@@ -67,10 +67,14 @@ public class UserListFragment extends Fragment implements UserAdapter.OnUserClic
     public void onDataLoad(List<User> users) {
         this.users = users;
         try {
-            FileUtil.writeFile(users, requireContext());
+            if(getContext() != null) {
+                FileUtil.writeFile(users, getContext());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         UserAdapter userAdapter = new UserAdapter(users, this);
         recyclerView.setAdapter(userAdapter);
     }
