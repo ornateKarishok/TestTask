@@ -1,6 +1,5 @@
 package com.mycompany.testtask.ui;
 
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
@@ -8,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
-import com.mycompany.testtask.util.DeviceUtil;
 import com.mycompany.testtask.util.FragmentUtil;
 
 public class TabletActivity extends AppCompatActivity {

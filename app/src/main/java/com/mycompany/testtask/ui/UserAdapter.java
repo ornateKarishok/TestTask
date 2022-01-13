@@ -14,7 +14,6 @@ import com.mycompany.testtask.R;
 import com.mycompany.testtask.models.User;
 import com.mycompany.testtask.util.DownloadImageTask;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {

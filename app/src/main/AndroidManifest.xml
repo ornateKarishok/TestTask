@@ -26,6 +26,7 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCAH2EGr2nW0IT_mpgIOH_tOkWBytjJAuU" />
+
         <activity
             android:name=".ui.TabletActivity"
             android:label="Users" />

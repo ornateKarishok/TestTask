@@ -3,7 +3,6 @@ package com.mycompany.testtask.ui;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import com.mycompany.testtask.util.FragmentUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class UserListFragment extends Fragment implements UserAdapter.OnUserClickListener, OnUsersLoadListener {
     private RecyclerView recyclerView;
@@ -67,7 +65,7 @@ public class UserListFragment extends Fragment implements UserAdapter.OnUserClic
     public void onDataLoad(List<User> users) {
         this.users = users;
         try {
-            if(getContext() != null) {
+            if (getContext() != null) {
                 FileUtil.writeFile(users, getContext());
             }
         } catch (IOException e) {

@@ -1,12 +1,8 @@
 package com.mycompany.testtask.util;
 
-import android.widget.FrameLayout;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.mycompany.testtask.R;
 
 public class FragmentUtil {
     private static void replaceFragment(FragmentManager manager, Fragment fragment, int containerId,
