@@ -43,7 +43,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.descriptionView.setText(user.getEmail());
         holder.infoView.setText(user.getCompany().getCatchPhrase());
         holder.itemView.setOnClickListener(v ->
-                holder.onItemClick(holder.getAdapterPosition()));
+                holder.onItemClick(user));
     }
 
     @Override
@@ -69,12 +69,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             return view.getContext();
         }
 
-        private void onItemClick(int position) {
-            onUserClickListener.onUserClick(position);
+        private void onItemClick(User user) {
+            onUserClickListener.onUserClick(user);
         }
     }
 
     public interface OnUserClickListener {
-        void onUserClick(int position);
+        void onUserClick(User user);
     }
 }

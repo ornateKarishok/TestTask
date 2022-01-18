@@ -50,14 +50,14 @@ public class UserListFragment extends Fragment implements UserAdapter.OnUserClic
     }
 
     @Override
-    public void onUserClick(int position) {
+    public void onUserClick(User user) {
         if (DeviceUtil.isTablet(requireContext())) {
             FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.userInfoFragment, UserInfoFragment.newInstance(this.users.get(position))).commit();
+            fragmentTransaction.replace(R.id.userInfoFragment, UserInfoFragment.newInstance(user)).commit();
         } else {
             FragmentUtil.replaceFragment(getParentFragmentManager(),
-                    UserInfoFragment.newInstance(this.users.get(position)), R.id.container);
+                    UserInfoFragment.newInstance(user), R.id.container);
         }
     }
 
