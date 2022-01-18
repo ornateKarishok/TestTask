@@ -27,7 +27,7 @@ import com.mycompany.testtask.models.User;
 
 public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
     public static final String SCHEME = "mailto";
-    public static final String ARG_KEY = "user";
+    private static final String ARG_KEY = "user";
     private User user;
 
     public static UserInfoFragment newInstance(User user) {
