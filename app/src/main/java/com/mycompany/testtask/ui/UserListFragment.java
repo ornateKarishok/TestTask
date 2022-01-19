@@ -51,12 +51,14 @@ public class UserListFragment extends Fragment implements UserAdapter.OnUserClic
 
     @Override
     public void onUserClick(User user) {
-        if (DeviceUtil.isTablet(requireContext())) {
-            FragmentUtil.replaceFragment(getParentFragmentManager(),
-                    UserInfoFragment.newInstance(user), R.id.userInfoFragment);
-        } else {
-            FragmentUtil.replaceFragment(getParentFragmentManager(),
-                    UserInfoFragment.newInstance(user), R.id.container);
+        if (getContext() != null) {
+            if (DeviceUtil.isTablet(getContext())) {
+                FragmentUtil.replaceFragment(getParentFragmentManager(),
+                        UserInfoFragment.newInstance(user), R.id.userInfoFragment);
+            } else {
+                FragmentUtil.replaceFragment(getParentFragmentManager(),
+                        UserInfoFragment.newInstance(user), R.id.container);
+            }
         }
     }
 
@@ -78,13 +80,15 @@ public class UserListFragment extends Fragment implements UserAdapter.OnUserClic
 
     @Override
     public void onError(Throwable t) {
-        List<User> users = FileUtil.readFile(requireContext());
-        if (!users.isEmpty()) {
-            this.users = users;
-            UserAdapter userAdapter = new UserAdapter(users, this);
-            recyclerView.setAdapter(userAdapter);
-        } else {
-            Toast.makeText(getContext(), Resources.getSystem().getString(R.string.failure) + t, Toast.LENGTH_LONG).show();
+        if (getContext() != null) {
+            List<User> users = FileUtil.readFile(getContext());
+            if (!users.isEmpty()) {
+                this.users = users;
+                UserAdapter userAdapter = new UserAdapter(users, this);
+                recyclerView.setAdapter(userAdapter);
+            } else {
+                Toast.makeText(getContext(), getString(R.string.failure) + t, Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
