@@ -32,9 +32,11 @@ public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
 
     public static UserInfoFragment newInstance(User user) {
         UserInfoFragment userInfoFragment = new UserInfoFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(ARG_KEY, user);
-        userInfoFragment.setArguments(args);
+        if (user != null) {
+            Bundle args = new Bundle();
+            args.putParcelable(ARG_KEY, user);
+            userInfoFragment.setArguments(args);
+        }
         return userInfoFragment;
     }
 

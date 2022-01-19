@@ -18,6 +18,6 @@ public class TabletActivity extends AppCompatActivity {
         FragmentUtil.replaceFragment(getSupportFragmentManager(),
                 UserListFragment.newInstance(), R.id.userList);
         FragmentUtil.replaceFragment(getSupportFragmentManager(),
-                UserInfoFragment.newInstance(new User()), R.id.userInfoFragment);
+                UserInfoFragment.newInstance(null), R.id.userInfoFragment);
     }
 }
