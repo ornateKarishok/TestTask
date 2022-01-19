@@ -55,13 +55,13 @@ public class UserInfoFragment extends Fragment implements OnMapReadyCallback {
             emailTextView.setOnClickListener(v -> {
                 Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         SCHEME, user.getEmail(), null));
-                startActivity(Intent.createChooser(intent, getResources().getString(R.string.choose_an_email)));
+                startActivity(Intent.createChooser(intent, getString(R.string.choose_an_email)));
             });
 
             phoneTextView.setText(user.getPhone());
             phoneTextView.setOnClickListener(v -> {
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                callIntent.setData(Uri.parse(getResources().getString(R.string.tel) + user.getPhone()));
+                callIntent.setData(Uri.parse(getString(R.string.tel) + user.getPhone()));
                 startActivity(callIntent);
             });
 
